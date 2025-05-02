@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>GitRepoTools Options</title>
+  <style>
+    body {
+      width: 300px;
+      padding: 16px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      font-size: 14px;
+      line-height: 1.5;
+      color: #24292e;
+    }
+    .header {
+      margin-bottom: 16px;
+      border-bottom: 1px solid #e1e4e8;
+      padding-bottom: 8px;
+    }
+    .header h2 {
+      margin: 0;
+      font-size: 16px;
+      font-weight: 600;
+    }
+    .option-group {
+      margin-bottom: 16px;
+    }
+    .option-group h3 {
+      margin: 0 0 8px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+    .option {
+      display: flex;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    .option label {
+      margin-left: 8px;
+      cursor: pointer;
+    }
+    .option input[type="checkbox"] {
+      cursor: pointer;
+    }
+    .footer {
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid #e1e4e8;
+      font-size: 12px;
+      color: #6a737d;
+    }
+    .coffee-button {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 12px;
+      background-color: #FFDD00;
+      color: #000;
+      border: none;
+      border-radius: 4px;
+      font-size: 14px;
+      font-weight: 500;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+    .coffee-button:hover {
+      background-color: #FFD700;
+    }
+    .coffee-button img {
+      margin-right: 8px;
+      width: 20px;
+      height: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h2>GitRepoTools Settings</h2>
+  </div>
+
+  <div class="option-group">
+    <h3>Tool Categories</h3>
+    <div class="option">
+      <input type="checkbox" id="showDeepWiki" checked>
+      <label for="showDeepWiki">Show DeepWiki</label>
+    </div>
+    <div class="option">
+      <input type="checkbox" id="showDiagram" checked>
+      <label for="showDiagram">Show Diagram Tools</label>
+    </div>
+    <div class="option">
+      <input type="checkbox" id="showIDE" checked>
+      <label for="showIDE">Show IDE Options</label>
+    </div>
+  </div>
+
+  <div class="option-group">
+    <h3>IDE Options</h3>
+    <div class="option">
+      <input type="checkbox" id="showVSCode" checked>
+      <label for="showVSCode">VS Code Web</label>
+    </div>
+    <div class="option">
+      <input type="checkbox" id="showGithubDev" checked>
+      <label for="showGithubDev">github.dev</label>
+    </div>
+    <div class="option">
+      <input type="checkbox" id="showCodeSandbox" checked>
+      <label for="showCodeSandbox">CodeSandbox</label>
+    </div>
+    <div class="option">
+      <input type="checkbox" id="showStackBlitz" checked>
+      <label for="showStackBlitz">StackBlitz</label>
+    </div>
+    <div class="option">
+      <input type="checkbox" id="showGitpod" checked>
+      <label for="showGitpod">Gitpod</label>
+    </div>
+  </div>
+
+  <div class="option-group">
+    <h3>Support</h3>
+    <div class="option">
+      <a href="https://buymeacoffee.com/rohit.wadhwa" target="_blank" class="coffee-button">
+        <img src="https://cdn.buymeacoffee.com/buttons/bmc-new-btn-logo.svg" alt="Buy me a coffee">
+        Buy me a coffee
+      </a>
+    </div>
+  </div>
+
+  <div class="footer">
+    Changes are saved automatically
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html> 

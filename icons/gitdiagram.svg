@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="128" height="128" viewBox="0 0 128 128"
+    xmlns="http://www.w3.org/2000/svg">
+    <!-- Background circle -->
+    <circle cx="64" cy="64" r="60" fill="#24292e"/>
+
+    <!-- Diagram nodes and connections -->
+    <circle cx="44" cy="44" r="12" fill="#ffffff"/>
+    <circle cx="84" cy="44" r="12" fill="#ffffff"/>
+    <circle cx="64" cy="84" r="12" fill="#ffffff"/>
+
+    <!-- Connection lines -->
+    <path d="M44 56L64 72M84 56L64 72" stroke="#ffffff" stroke-width="4"/>
+
+    <!-- Git branch symbols -->
+    <circle cx="44" cy="44" r="6" fill="#24292e"/>
+    <circle cx="84" cy="44" r="6" fill="#24292e"/>
+    <circle cx="64" cy="84" r="6" fill="#24292e"/>
+</svg> 
