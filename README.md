@@ -20,16 +20,8 @@ A Chrome extension that adds quick access buttons to view GitHub repositories in
 *Quick access buttons integrated into GitHub's interface*
 
 ### IDE Options
-![IDE Dropdown](images/ide-dropdown.png)
+![IDE Dropdown](images/ide-dropdown.jpg)
 *Multiple WebIDE options available in the dropdown*
-
-### GitDiagram Integration
-![GitDiagram View](images/gitdiagram-view.png)
-*Visualize repository architecture with GitDiagram*
-
-### Gitingest Integration
-![Gitingest View](images/gitingest-view.png)
-*Generate a prompt-friendly text digest of the repository with Gitingest*
 
 ### Settings
 ![Settings Popup](images/settings-popup.png)
