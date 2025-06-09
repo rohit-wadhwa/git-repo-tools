@@ -1,6 +1,6 @@
-# Contributing to QuickWiki for GitHub
+# Contributing to GitRepoTools
 
-Thank you for your interest in contributing to QuickWiki for GitHub! This document provides guidelines and instructions for contributing to this project.
+Thank you for your interest in contributing to GitRepoTools! This document provides guidelines and instructions for contributing to this project.
 
 ## Code of Conduct
 
@@ -68,7 +68,7 @@ By participating in this project, you agree to abide by the following code of co
 
 ## Documentation
 
-- Update README.md if your changes affect user-facing features
+- Update README.md if your changes affect user-facing features (e.g., DeepWiki, GitDiagram, Gitingest, IDE)
 - Add comments for new functions or complex logic
 - Update any relevant documentation
 
