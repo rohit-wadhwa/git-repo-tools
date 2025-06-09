@@ -1,11 +1,11 @@
 # Changelog
 
-All notable changes to the QuickWiki for GitHub extension will be documented in this file.
+All notable changes to the GitRepoTools extension will be documented in this file.
 
 ## [1.0.0] - 2024-03-20
 
 ### Added
-- Initial release of QuickWiki for GitHub
+- Initial release of GitRepoTools
 - DeepWiki integration for AI-powered documentation
 - GitDiagram integration for code visualization
 - WebIDE integration with multiple options:
@@ -28,7 +28,7 @@ All notable changes to the QuickWiki for GitHub extension will be documented in 
 ## [Unreleased]
 
 ### Added
-- N/A
+- Gitingest button: Quick access to https://gitingest.com/ for prompt-friendly codebase digests
 
 ### Changed
 - N/A

@@ -1,0 +1,44 @@
+# System Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE Files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.code-workspace
+
+# Node modules (if any)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Temporary files
+*.tmp
+*.temp
+*.log
+
+# OS generated files
+Icon?
+.DocumentRevisions-V100
+.fseventsd
+.TemporaryItems
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Archive files
+*.zip
+*.rar
+*.7z
+*.tar.gz
+
+# Personal/sensitive files
+config.local.*
+.env.local 

@@ -2,7 +2,7 @@
 
 ## Supported Versions
 
-We currently support the following versions of the QuickWiki for GitHub extension:
+We currently support the following versions of the GitRepoTools extension:
 
 | Version | Supported          |
 | ------- | ------------------ |
@@ -22,7 +22,7 @@ We take the security of our extension seriously. If you believe you've found a s
 
 ## Security Measures
 
-The QuickWiki for GitHub extension implements the following security measures:
+The GitRepoTools extension implements the following security measures:
 
 - No collection or storage of personal data
 - All settings are stored locally in the browser
@@ -32,7 +32,7 @@ The QuickWiki for GitHub extension implements the following security measures:
 
 ## Security Considerations
 
-- The extension only works with public GitHub repositories
+- The extension only works with public GitHub repositories and public Gitingest digests
 - No authentication tokens or sensitive data are stored
 - All external links are opened in new tabs
 - The extension follows Chrome's security best practices

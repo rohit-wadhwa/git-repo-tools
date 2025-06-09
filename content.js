@@ -36,60 +36,21 @@ function createButtonDOM(type, text, url) {
   // Create container div
   const container = document.createElement('div');
   container.className = 'd-none d-md-block';
-  container.style.cssText = 'width: 95px; height: 27.9972px; position: relative;';
 
-  // Create button
+  // Create button - remove inline styles to let CSS handle it
   const button = document.createElement('a');
   button.href = url;
   button.rel = 'nofollow';
   button.setAttribute('data-view-component', 'true');
   button.setAttribute('data-quickwiki-button', type);
   button.setAttribute('aria-label', text);
-  button.style.cssText = `
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: rgb(246, 248, 250);
-    color: rgb(37, 41, 46);
-    border: 0.909091px solid rgb(209, 217, 224);
-    padding: 0px 8px;
-    margin: 0px;
-    width: 100%;
-    height: 100%;
-    text-decoration: none;
-    border-radius: 6px;
-    font-size: 12px;
-    font-weight: 500;
-    line-height: 20px;
-    white-space: nowrap;
-    position: relative;
-  `;
+  button.setAttribute('tabindex', '0');
   
   // Create tooltip
   const tooltip = document.createElement('div');
-  tooltip.className = 'Button-tooltip';
+  tooltip.className = 'gitrepotools-tooltip';
   tooltip.setAttribute('role', 'tooltip');
-  tooltip.style.cssText = `
-    position: absolute;
-    display: none;
-    opacity: 0;
-    padding: 0.4em 0.8em;
-    font-size: 12px;
-    font-weight: 400;
-    white-space: nowrap;
-    background-color: rgb(36, 41, 47);
-    color: rgb(255, 255, 255);
-    border-radius: 6px;
-    box-shadow: 0 1px 0 rgba(27,31,36,0.04);
-    top: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    margin-top: 6px;
-    pointer-events: none;
-    z-index: 1000;
-    transition: opacity 0.1s ease-in-out;
-  `;
-  tooltip.textContent = text;
+  tooltip.textContent = `Open in ${text}`;
 
   // Add hover effects
   button.addEventListener('mouseenter', () => {
@@ -108,9 +69,11 @@ function createButtonDOM(type, text, url) {
       <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" class="octicon">
         ${type === 'deepwiki' 
           ? '<path fill="currentColor" d="M0 1.75A.75.75 0 0 1 .75 1h4.253c1.227 0 2.317.59 3 1.501A3.743 3.743 0 0 1 11.006 1h4.245a.75.75 0 0 1 .75.75v10.5a.75.75 0 0 1-.75.75h-4.507a2.25 2.25 0 0 0-1.591.659l-.622.621a.75.75 0 0 1-1.06 0l-.622-.621A2.25 2.25 0 0 0 5.258 13H.75a.75.75 0 0 1-.75-.75Zm7.251 10.324.004-5.073-.002-2.253A2.25 2.25 0 0 0 5.003 2.5H1.5v9h3.757a3.75 3.75 0 0 1 1.994.574ZM8.755 4.75l-.004 7.322a3.752 3.752 0 0 1 1.992-.572H14.5v-9h-3.495a2.25 2.25 0 0 0-2.25 2.25Z"></path>'
-          : '<path fill="currentColor" d="M1.5 1.75v11.5c0 .138.112.25.25.25h12.5a.25.25 0 0 0 .25-.25V1.75a.25.25 0 0 0-.25-.25H1.75a.25.25 0 0 0-.25.25Zm.5 11.25v-11h11.5v11Zm8-3.25a.75.75 0 0 1 .75-.75h1.5a.75.75 0 0 1 0 1.5h-1.5a.75.75 0 0 1-.75-.75Zm-4 0a.75.75 0 0 1 .75-.75h1.5a.75.75 0 0 1 0 1.5h-1.5a.75.75 0 0 1-.75-.75Zm.75-2.25a.75.75 0 0 0 0 1.5h1.5a.75.75 0 0 0 0-1.5h-1.5Zm4 0a.75.75 0 0 0 0 1.5h1.5a.75.75 0 0 0 0-1.5h-1.5Z"></path>'}
+          : type === 'diagram'
+          ? '<path fill="currentColor" d="M1.5 1.75v11.5c0 .138.112.25.25.25h12.5a.25.25 0 0 0 .25-.25V1.75a.25.25 0 0 0-.25-.25H1.75a.25.25 0 0 0-.25.25Zm.5 11.25v-11h11.5v11Zm8-3.25a.75.75 0 0 1 .75-.75h1.5a.75.75 0 0 1 0 1.5h-1.5a.75.75 0 0 1-.75-.75Zm-4 0a.75.75 0 0 1 .75-.75h1.5a.75.75 0 0 1 0 1.5h-1.5a.75.75 0 0 1-.75-.75Zm.75-2.25a.75.75 0 0 0 0 1.5h1.5a.75.75 0 0 0 0-1.5h-1.5Zm4 0a.75.75 0 0 0 0 1.5h1.5a.75.75 0 0 0 0-1.5h-1.5Z"></path>'
+          : '<path fill="currentColor" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path>'}
       </svg>
-      ${type === 'deepwiki' ? 'DeepWiki' : 'Diagram'}
+      ${type === 'deepwiki' ? 'DeepWiki' : type === 'diagram' ? 'Diagram' : 'Gitingest'}
     </span>
   `;
 
@@ -125,32 +88,16 @@ function createWebIDEButton(type, text, getUrl) {
 
   const button = document.createElement('button');
   button.type = 'button';
-  button.className = 'btn btn-sm ide-button';
+  button.className = 'ide-button';
+  button.setAttribute('aria-label', 'Open in Web IDE');
+  button.setAttribute('aria-haspopup', 'true');
+  button.setAttribute('aria-expanded', 'false');
 
   const overlay = document.createElement('div');
   overlay.className = 'dropdown-menu ide-overlay';
-  overlay.style.cssText = `
-    position: absolute;
-    display: none;
-    z-index: 1000;
-    top: 100%;
-    right: 0;
-    width: 240px;
-    background-color: var(--color-canvas-overlay);
-    border: 1px solid var(--color-border-default);
-    border-radius: 6px;
-    box-shadow: var(--color-shadow-large);
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-  `;
 
   const menuList = document.createElement('ul');
   menuList.className = 'ide-menu-list';
-  menuList.style.cssText = `
-    list-style: none;
-    padding: 8px 0;
-    margin: 0;
-    width: 100%;
-  `;
 
   // Add header
   const headerItem = document.createElement('li');
@@ -159,60 +106,54 @@ function createWebIDEButton(type, text, getUrl) {
   menuList.appendChild(headerItem);
 
   const webIDEOptions = [
-    { name: 'VS Code', url: (repo) => `https://vscode.dev/github/${repo}` },
-    { name: 'github.dev', url: (repo) => `https://github.dev/${repo}` },
-    { name: 'CodeSandbox', url: (repo) => `https://codesandbox.io/s/github/${repo}` },
-    { name: 'StackBlitz', url: (repo) => `https://stackblitz.com/github/${repo}` },
-    { name: 'Gitpod', url: (repo) => `https://gitpod.io/#https://github.com/${repo}` }
+    { name: 'VS Code', url: (repo) => `https://vscode.dev/github/${repo}`, id: 'showVSCode' },
+    { name: 'github.dev', url: (repo) => `https://github.dev/${repo}`, id: 'showGithubDev' },
+    { name: 'CodeSandbox', url: (repo) => `https://codesandbox.io/s/github/${repo}`, id: 'showCodeSandbox' },
+    { name: 'StackBlitz', url: (repo) => `https://stackblitz.com/github/${repo}`, id: 'showStackBlitz' },
+    { name: 'Gitpod', url: (repo) => `https://gitpod.io/#https://github.com/${repo}`, id: 'showGitpod' }
   ];
 
   webIDEOptions.forEach(option => {
-    const item = document.createElement('li');
-    const link = document.createElement('a');
-    link.href = option.url(getUrl());
-    link.className = 'ide-menu-item';
-    link.style.cssText = `
-      display: flex;
-      align-items: center;
-      padding: 6px 16px;
-      color: var(--color-fg-default);
-      text-decoration: none;
-      font-size: 14px;
-      width: 100%;
-      cursor: pointer;
-    `;
-    link.textContent = option.name;
-    item.appendChild(link);
-    menuList.appendChild(item);
+    // Check if this IDE option is enabled in settings
+    if (currentSettings.ideOptions[option.id]) {
+      const item = document.createElement('li');
+      const link = document.createElement('a');
+      link.href = option.url(getUrl());
+      link.className = 'ide-menu-item';
+      link.textContent = option.name;
+      link.setAttribute('target', '_blank');
+      link.setAttribute('rel', 'noopener noreferrer');
+      item.appendChild(link);
+      menuList.appendChild(item);
+    }
   });
 
   overlay.appendChild(menuList);
 
-  // Add click handler with view transitions
+  // Add click handler
   button.addEventListener('click', (e) => {
     e.preventDefault();
     e.stopPropagation();
     
-    const isHidden = overlay.style.display === 'none';
-    if (document.startViewTransition) {
-      document.startViewTransition(() => {
-        overlay.style.display = isHidden ? 'block' : 'none';
-      });
-    } else {
-      overlay.style.display = isHidden ? 'block' : 'none';
-    }
+    const isHidden = overlay.style.display === 'none' || !overlay.style.display;
+    const newDisplay = isHidden ? 'block' : 'none';
+    
+    // Close other dropdowns first
+    document.querySelectorAll('.ide-overlay').forEach(menu => {
+      if (menu !== overlay) {
+        menu.style.display = 'none';
+      }
+    });
+    
+    overlay.style.display = newDisplay;
+    button.setAttribute('aria-expanded', isHidden ? 'true' : 'false');
   });
 
   // Close dropdown when clicking outside
   document.addEventListener('click', (e) => {
     if (!container.contains(e.target)) {
-      if (document.startViewTransition) {
-        document.startViewTransition(() => {
-          overlay.style.display = 'none';
-        });
-      } else {
-        overlay.style.display = 'none';
-      }
+      overlay.style.display = 'none';
+      button.setAttribute('aria-expanded', 'false');
     }
   });
 
@@ -232,6 +173,29 @@ function createWebIDEButton(type, text, getUrl) {
   container.appendChild(button);
   container.appendChild(overlay);
   return container;
+}
+
+// --- Dropdown management helpers ---
+let openDropdown = null;
+
+function closeAllDropdowns() {
+  document.querySelectorAll('.gitrepotools-dropdown-menu').forEach(menu => {
+    menu.style.display = 'none';
+    if (menu.parentElement) menu.parentElement.classList.remove('gitrepotools-dropdown-open');
+  });
+  openDropdown = null;
+}
+
+// Attach a single document click handler (only once)
+if (!window._gitrepotoolsDropdownHandler) {
+  document.addEventListener('click', (e) => {
+    // If the click is inside an open dropdown or its button, do nothing
+    if (openDropdown && openDropdown.parentElement && openDropdown.parentElement.contains(e.target)) {
+      return;
+    }
+    closeAllDropdowns();
+  });
+  window._gitrepotoolsDropdownHandler = true;
 }
 
 function createToolsGroup(repName) {
@@ -262,6 +226,19 @@ function createToolsGroup(repName) {
       icon: '<path fill="currentColor" d="M1.5 1.75v11.5c0 .138.112.25.25.25h12.5a.25.25 0 0 0 .25-.25V1.75a.25.25 0 0 0-.25-.25H1.75a.25.25 0 0 0-.25.25Zm.5 11.25v-11h11.5v11Zm8-3.25a.75.75 0 0 1 .75-.75h1.5a.75.75 0 0 1 0 1.5h-1.5a.75.75 0 0 1-.75-.75Zm-4 0a.75.75 0 0 1 .75-.75h1.5a.75.75 0 0 1 0 1.5h-1.5a.75.75 0 0 1-.75-.75Zm.75-2.25a.75.75 0 0 0 0 1.5h1.5a.75.75 0 0 0 0-1.5h-1.5Zm4 0a.75.75 0 0 0 0 1.5h1.5a.75.75 0 0 0 0-1.5h-1.5Z"/>',
       options: [
         { name: 'GitDiagram', url: (repo) => `https://gitdiagram.com/${repo}` }
+      ]
+    });
+  }
+
+  // 2.5) Gitingest
+  // Add after Diagram and before IDE
+  if (currentSettings.categories.showGitingest) {
+    toolCategories.push({
+      id: 'gitingest',
+      label: 'Gitingest',
+      icon: '<rect x="2" y="1.5" width="9" height="12" rx="1.2" fill="none" stroke="currentColor" stroke-width="1.2"/><circle cx="9.5" cy="11.5" r="2.2" fill="none" stroke="currentColor" stroke-width="1.2"/><line x1="11" y1="13" x2="13" y2="15" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>' ,
+      options: [
+        { name: 'Gitingest', url: (repo) => `https://gitingest.com/${repo}` }
       ]
     });
   }
@@ -307,10 +284,31 @@ function createToolsGroup(repName) {
       // For single option categories, create a link
       element = document.createElement('a');
       element.href = category.options[0].url(repName);
+      // Add tooltip for single-option buttons
+      const tooltip = document.createElement('div');
+      tooltip.className = 'gitrepotools-tooltip';
+      tooltip.setAttribute('role', 'tooltip');
+      tooltip.textContent = `Open in ${category.label}`;
+      // Show/hide tooltip using opacity and pointer-events only
+      element.addEventListener('mouseenter', () => {
+        tooltip.style.opacity = '1';
+        tooltip.style.pointerEvents = 'auto';
+      });
+      element.addEventListener('mouseleave', () => {
+        tooltip.style.opacity = '0';
+        tooltip.style.pointerEvents = 'none';
+      });
+      // Append tooltip as sibling to button inside container
+      buttonContainer.appendChild(element);
+      buttonContainer.appendChild(tooltip);
+      // Set container positioning for tooltip
+      buttonContainer.style.position = 'relative';
+      buttonContainer.style.overflow = 'visible';
     } else {
       // For multiple options, create a button
       element = document.createElement('button');
       element.type = 'button';
+      buttonContainer.appendChild(element);
     }
 
     element.className = 'btn btn-sm';
@@ -350,7 +348,7 @@ function createToolsGroup(repName) {
         position: absolute;
         top: 100%;
         left: 0;
-        z-index: 1000;
+        z-index: 9999;
         min-width: 160px;
         padding: 4px 0;
         margin: 2px 0 0;
@@ -358,7 +356,13 @@ function createToolsGroup(repName) {
         border: 1px solid rgba(27,31,36,0.15);
         border-radius: 6px;
         box-shadow: 0 1px 3px rgba(27,31,36,0.12);
+        pointer-events: auto;
       `;
+
+      // Ensure the button container is positioned relative for absolute dropdown
+      buttonContainer.style.position = 'relative';
+      buttonContainer.style.height = 'auto';
+      buttonContainer.style.overflow = 'visible';
 
       category.options.forEach(option => {
         const item = document.createElement('a');
@@ -379,34 +383,24 @@ function createToolsGroup(repName) {
         dropdown.appendChild(item);
       });
 
-      // Toggle dropdown on click
+      // Toggle dropdown on click (single handler)
       element.addEventListener('click', (e) => {
         e.preventDefault();
         e.stopPropagation();
-        
         const isHidden = dropdown.style.display === 'none';
-        if (document.startViewTransition) {
-          document.startViewTransition(() => {
-            dropdown.style.display = isHidden ? 'block' : 'none';
-          });
+        closeAllDropdowns();
+        if (isHidden) {
+          dropdown.style.display = 'block';
+          buttonContainer.classList.add('gitrepotools-dropdown-open');
+          openDropdown = dropdown;
         } else {
-          dropdown.style.display = isHidden ? 'block' : 'none';
+          dropdown.style.display = 'none';
+          buttonContainer.classList.remove('gitrepotools-dropdown-open');
+          openDropdown = null;
         }
       });
 
-      // Close dropdown when clicking outside
-      document.addEventListener('click', (e) => {
-        if (!buttonContainer.contains(e.target)) {
-          if (document.startViewTransition) {
-            document.startViewTransition(() => {
-              dropdown.style.display = 'none';
-            });
-          } else {
-            dropdown.style.display = 'none';
-          }
-        }
-      });
-
+      // Always append dropdown as last child
       buttonContainer.appendChild(dropdown);
     }
 
@@ -537,6 +531,27 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 // Update the injected CSS to add responsive styles
 const styleSheet = document.createElement('style');
 styleSheet.textContent = `
+  .gitrepotools-tooltip {
+    position: absolute;
+    top: calc(100% + 2px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgb(37, 41, 46);
+    color: rgb(255, 255, 255);
+    padding: 4px 8px;
+    border: 0px none rgb(255, 255, 255);
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 400;
+    text-align: center;
+    white-space: normal;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+    z-index: 1000;
+    margin-top: 0;
+    display: block;
+  }
   .gitrepotools-dropdown-menu {
     opacity: 0;
     transform: translateY(-10px);

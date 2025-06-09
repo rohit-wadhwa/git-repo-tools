@@ -1,0 +1,205 @@
+/* GitRepoTools Chrome Extension Styles */
+
+/* Button group container with high specificity */
+.gitrepotools-btn-group {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  gap: 8px !important;
+  margin-left: 4px !important;
+  padding-top: 0 !important;
+  width: auto !important;
+}
+
+.gitrepotools-btn-group > div {
+  margin: 0 !important;
+  width: auto !important;
+}
+
+/* High specificity button styles to override GitHub */
+.gitrepotools-btn-group a[data-quickwiki-button],
+.gitrepotools-btn-group button.ide-button {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background-color: var(--color-btn-bg, #f6f8fa) !important;
+  color: var(--color-btn-text, #24292f) !important;
+  border: 1px solid var(--color-btn-border, #d0d7de) !important;
+  padding: 5px 16px !important;
+  margin: 0 !important;
+  height: auto !important;
+  min-height: 32px !important;
+  text-decoration: none !important;
+  border-radius: 6px !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  line-height: 20px !important;
+  white-space: nowrap !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+  position: relative !important;
+  box-sizing: border-box !important;
+}
+
+.gitrepotools-btn-group a[data-quickwiki-button]:hover,
+.gitrepotools-btn-group button.ide-button:hover {
+  background-color: var(--color-btn-hover-bg, #f3f4f6) !important;
+  border-color: var(--color-btn-hover-border, #d0d7de) !important;
+  text-decoration: none !important;
+}
+
+/* Focus states for accessibility */
+.gitrepotools-btn-group a[data-quickwiki-button]:focus,
+.gitrepotools-btn-group button.ide-button:focus {
+  outline: 2px solid var(--color-accent-emphasis, #0969da) !important;
+  outline-offset: -2px !important;
+  box-shadow: inset 0 0 0 1px var(--color-accent-emphasis, #0969da) !important;
+}
+
+/* Override any GitHub button resets */
+.gitrepotools-btn-group a[data-quickwiki-button]:not([disabled]),
+.gitrepotools-btn-group button.ide-button:not([disabled]) {
+  cursor: pointer !important;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .gitrepotools-btn-group a[data-quickwiki-button],
+  .gitrepotools-btn-group button.ide-button {
+    border-width: 2px !important;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .gitrepotools-btn-group a[data-quickwiki-button],
+  .gitrepotools-btn-group button.ide-button,
+  .gitrepotools-tooltip,
+  .gitrepotools-dropdown-menu {
+    transition: none !important;
+  }
+}
+
+/* Tooltip with higher specificity */
+.gitrepotools-tooltip[role="tooltip"] {
+  position: absolute !important;
+  top: calc(100% + 8px) !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  background: var(--color-neutral-emphasis-plus, #24292f) !important;
+  color: var(--color-fg-on-emphasis, #ffffff) !important;
+  padding: 4px 8px !important;
+  border: none !important;
+  border-radius: 6px !important;
+  font-size: 12px !important;
+  font-weight: 400 !important;
+  text-align: center !important;
+  white-space: nowrap !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  transition: opacity 0.2s ease !important;
+  z-index: 1000 !important;
+  margin-top: 0 !important;
+  display: none !important;
+}
+
+/* IDE dropdown menu */
+.ide-overlay.dropdown-menu {
+  position: absolute !important;
+  display: none !important;
+  z-index: 1000 !important;
+  top: 100% !important;
+  right: 0 !important;
+  width: 240px !important;
+  background-color: var(--color-canvas-overlay, #ffffff) !important;
+  border: 1px solid var(--color-border-default, rgba(27,31,36,0.15)) !important;
+  border-radius: 6px !important;
+  box-shadow: var(--color-shadow-medium, 0 8px 24px rgba(140,149,159,0.2)) !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif !important;
+  padding: 0 !important;
+  margin: 2px 0 0 !important;
+}
+
+.ide-menu-list {
+  list-style: none !important;
+  padding: 8px 0 !important;
+  margin: 0 !important;
+  width: 100% !important;
+}
+
+.ide-menu-header {
+  padding: 6px 16px !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  color: var(--color-fg-muted, #656d76) !important;
+  border-bottom: 1px solid var(--color-border-muted, #d1d9e0) !important;
+  margin-bottom: 8px !important;
+}
+
+.ide-menu-item {
+  display: flex !important;
+  align-items: center !important;
+  padding: 6px 16px !important;
+  color: var(--color-fg-default, #24292f) !important;
+  text-decoration: none !important;
+  font-size: 14px !important;
+  width: 100% !important;
+  cursor: pointer !important;
+  border: none !important;
+  background: none !important;
+  box-sizing: border-box !important;
+}
+
+.ide-menu-item:hover,
+.ide-menu-item:focus {
+  background-color: var(--color-action-list-item-default-hover-bg, #f6f8fa) !important;
+  text-decoration: none !important;
+  outline: none !important;
+}
+
+/* Dark mode specific styles */
+@media (prefers-color-scheme: dark) {
+  .gitrepotools-tooltip[role="tooltip"] {
+    background: var(--color-neutral-emphasis-plus, #21262d) !important;
+    color: var(--color-fg-on-emphasis, #f0f6ff) !important;
+  }
+}
+
+/* Mobile responsive styles */
+@media (max-width: 800px) {
+  .gitrepotools-btn-group {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    width: 100% !important;
+    gap: 8px !important;
+    padding-top: 16px !important;
+    margin-left: 0 !important;
+  }
+  
+  .gitrepotools-btn-group > div {
+    width: 100% !important;
+    margin: 0 !important;
+  }
+  
+  .gitrepotools-btn-group a[data-quickwiki-button],
+  .gitrepotools-btn-group button.ide-button {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+}
+
+/* Ensure buttons don't inherit unwanted GitHub styles */
+.gitrepotools-btn-group * {
+  box-sizing: border-box !important;
+}
+
+/* Override any conflicting GitHub form styles */
+.gitrepotools-btn-group button {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif !important;
+}
+
+/* Specific overrides for IDE button container */
+.ide-button-container {
+  position: relative !important;
+  display: inline-block !important;
+} 

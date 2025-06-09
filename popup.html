@@ -10,6 +10,7 @@
       font-size: 14px;
       line-height: 1.5;
       color: #24292e;
+      transition: opacity 0.2s ease;
     }
     .header {
       margin-bottom: 16px;
@@ -70,9 +71,43 @@
       width: 20px;
       height: 20px;
     }
+    .reset-button {
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 8px;
+      background-color: #f6f8fa;
+      color: #24292f;
+      border: 1px solid #d0d7de;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 500;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background-color 0.2s;
+      margin-top: 8px;
+    }
+    .reset-button:hover {
+      background-color: #f3f4f6;
+    }
+    .loading-spinner {
+      display: none;
+      width: 16px;
+      height: 16px;
+      border: 2px solid #f3f3f3;
+      border-top: 2px solid #0969da;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
   </style>
 </head>
 <body>
+  <div class="loading-spinner" id="loadingSpinner"></div>
+  
   <div class="header">
     <h2>GitRepoTools Settings</h2>
   </div>
@@ -86,6 +121,10 @@
     <div class="option">
       <input type="checkbox" id="showDiagram" checked>
       <label for="showDiagram">Show Diagram Tools</label>
+    </div>
+    <div class="option">
+      <input type="checkbox" id="showGitingest" checked>
+      <label for="showGitingest">Show Gitingest Button</label>
     </div>
     <div class="option">
       <input type="checkbox" id="showIDE" checked>
@@ -115,6 +154,7 @@
       <input type="checkbox" id="showGitpod" checked>
       <label for="showGitpod">Gitpod</label>
     </div>
+    <button class="reset-button" id="resetButton">Reset to Defaults</button>
   </div>
 
   <div class="option-group">
