@@ -1,0 +1,28 @@
+name: Deploy Chrome Extension to Store
+
+on:
+  push:
+    branches:
+      - main   # Trigger on pushes to the main branch
+    tags:
+      - 'v*'   # Optional: Trigger on version tags (e.g., v1.0.0)
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Package Extension
+        run: zip -r extension.zip * -x "*.git*" "*.github*" "node_modules/*"
+
+      - name: Upload to Chrome Web Store
+        uses: Klemensas/chrome-extension-upload-action@v1.1
+        with:
+          refresh-token: ${{ secrets.CHROME_REFRESH_TOKEN }}
+          client-id: ${{ secrets.CHROME_CLIENT_ID }}
+          client-secret: ${{ secrets.CHROME_EXTENSION_SECRET }}
+          file-name: './extension.zip'
+          app-id: ${{ secrets.CHROME_APP_ID }}
+          publish: true
