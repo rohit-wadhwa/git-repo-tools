@@ -1,6 +1,6 @@
 # GitRepoTools
 
-![Chrome Web Store](https://img.shields.io/chrome-web-store/v/your-extension-id)
+![Chrome Web Store](https://img.shields.io/chrome-web-store/v/jlhmngpldhnhigcjbbnldinemegmcooa)
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 
 A Chrome extension that adds quick access buttons to view GitHub repositories in DeepWiki and GitDiagram, with additional WebIDE integration.
