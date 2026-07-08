@@ -4,7 +4,8 @@ const defaultSettings = {
     showIDE: true,
     showDeepWiki: true,
     showDiagram: true,
-    showGitingest: true
+    showGitingest: true,
+    showHtmlPreview: true
   },
   ideOptions: {
     showVSCode: true,
@@ -186,7 +187,8 @@ function updateSettings() {
       showIDE: document.getElementById('showIDE')?.checked ?? false,
       showDeepWiki: document.getElementById('showDeepWiki')?.checked ?? false,
       showDiagram: document.getElementById('showDiagram')?.checked ?? false,
-      showGitingest: document.getElementById('showGitingest')?.checked ?? false
+      showGitingest: document.getElementById('showGitingest')?.checked ?? false,
+      showHtmlPreview: document.getElementById('showHtmlPreview')?.checked ?? false
     },
     ideOptions: {
       showVSCode: document.getElementById('showVSCode')?.checked ?? false,

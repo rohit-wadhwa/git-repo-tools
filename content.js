@@ -7,7 +7,8 @@ const defaultSettings = {
   categories: {
     showIDE: true,
     showDeepWiki: true,
-    showDiagram: true
+    showDiagram: true,
+    showHtmlPreview: true
   },
   ideOptions: {
     showVSCode: true,
@@ -460,6 +461,7 @@ function cleanup() {
   if (container) {
     container.remove();
   }
+  document.querySelectorAll('[data-gitrepotools-preview-btn],[data-gitrepotools-preview-panel]').forEach(el => el.remove());
   buttonsAdded = false;
 }
 
@@ -496,6 +498,7 @@ function init() {
       
       // Initial update
       updateButtons();
+      initHtmlPreview();
     });
   });
 }
@@ -521,6 +524,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         }
         cleanup();
         updateButtons();
+        initHtmlPreview();
         break;
     }
   } catch (error) {
@@ -603,4 +607,95 @@ styleSheet.textContent = `
     }
   }
 `;
-document.head.appendChild(styleSheet); 
+document.head.appendChild(styleSheet);
+
+
+// ================= HTML Preview (file-level feature) =================
+// Adds a "Preview" button on GitHub HTML file (blob) pages that renders the file
+// in a sandboxed iframe (scripts + same-origin disabled). Requested feature.
+let previewObserver = null;
+
+function isHtmlBlobPage() {
+  return /^\/[^/]+\/[^/]+\/blob\/.+\.(?:html?|htm)(?:[?#]|$)/i.test(location.pathname);
+}
+
+function rawUrlFromBlob() {
+  const m = location.pathname.match(/^\/([^/]+)\/([^/]+)\/blob\/(.+?)(?:[?#].*)?$/);
+  return m ? ('https://raw.githubusercontent.com/' + m[1] + '/' + m[2] + '/' + m[3]) : null;
+}
+
+function findBlobActions() {
+  const raw = document.querySelector('a[data-testid="raw-button"]')
+    || document.querySelector('#raw-url')
+    || Array.from(document.querySelectorAll('a')).find(a => /\/raw\//.test(a.getAttribute('href') || ''));
+  if (raw && raw.parentElement) return raw.parentElement;
+  return document.querySelector('.react-blob-header-edit-and-raw-actions')
+    || document.querySelector('[data-testid="file-header"]')
+    || null;
+}
+
+function fetchRaw(url) {
+  return new Promise((resolve, reject) => {
+    chrome.runtime.sendMessage({ type: 'FETCH_RAW', url }, (resp) => {
+      if (chrome.runtime.lastError) return reject(chrome.runtime.lastError);
+      if (resp && resp.ok) resolve(resp.text);
+      else reject(new Error((resp && resp.error) || 'fetch failed'));
+    });
+  });
+}
+
+function addHtmlPreviewButton() {
+  if (currentSettings.categories && currentSettings.categories.showHtmlPreview === false) return;
+  if (!isHtmlBlobPage()) return;
+  if (document.querySelector('[data-gitrepotools-preview-btn]')) return;
+  const actions = findBlobActions();
+  if (!actions) return; // graceful no-op: never break the page
+
+  const btn = document.createElement('button');
+  btn.type = 'button';
+  btn.textContent = 'Preview';
+  btn.className = 'btn btn-sm';
+  btn.setAttribute('data-gitrepotools-preview-btn', 'true');
+  btn.style.cssText = 'margin-left:8px;';
+  let panel = null;
+
+  btn.addEventListener('click', async (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (panel) { panel.remove(); panel = null; btn.textContent = 'Preview'; return; }
+    const url = rawUrlFromBlob();
+    if (!url) return;
+    btn.textContent = 'Loading...';
+    try {
+      const html = await fetchRaw(url);
+      panel = document.createElement('div');
+      panel.setAttribute('data-gitrepotools-preview-panel', 'true');
+      panel.style.cssText = 'border:1px solid var(--borderColor-default,#d0d7de);border-radius:6px;margin:12px 0;overflow:hidden;';
+      const iframe = document.createElement('iframe');
+      iframe.setAttribute('sandbox', ''); // scripts + same-origin disabled = safe preview
+      iframe.setAttribute('title', 'HTML preview');
+      iframe.style.cssText = 'width:100%;height:70vh;border:0;background:#fff;display:block;';
+      iframe.srcdoc = html;
+      panel.appendChild(iframe);
+      const header = document.querySelector('[data-testid="file-header"]') || actions.closest('div') || actions;
+      (header.parentElement || document.body).insertBefore(panel, header.nextSibling);
+      btn.textContent = 'Hide preview';
+    } catch (err) {
+      console.error('[GitRepoTools] HTML preview failed:', err);
+      btn.textContent = 'Preview failed';
+      setTimeout(() => { btn.textContent = 'Preview'; }, 2500);
+    }
+  });
+  actions.appendChild(btn);
+}
+
+function initHtmlPreview() {
+  addHtmlPreviewButton();
+  if (previewObserver) return;
+  previewObserver = new MutationObserver(() => {
+    if (isHtmlBlobPage() && !document.querySelector('[data-gitrepotools-preview-btn]')) {
+      addHtmlPreviewButton();
+    }
+  });
+  if (document.body) previewObserver.observe(document.body, { childList: true, subtree: true });
+}

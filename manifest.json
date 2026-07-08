@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "GitRepoTools",
   "short_name": "GitRepoTools",
-  "version": "1.0",
+  "version": "1.1",
   "description": "Essential tools for GitHub repositories - Web IDE integration, documentation, and repository insights",
   "author": "Rohit Wadhwa",
   "homepage_url": "https://github.com/rohit-wadhwa/git-repo-tools",
@@ -20,13 +20,20 @@
     "storage"
   ],
   "host_permissions": [
-    "https://github.com/*"
+    "https://github.com/*",
+    "https://raw.githubusercontent.com/*"
   ],
   "content_scripts": [
     {
-      "matches": ["https://github.com/*"],
-      "js": ["content.js"],
-      "css": ["content.css"],
+      "matches": [
+        "https://github.com/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "css": [
+        "content.css"
+      ],
       "run_at": "document_idle"
     }
   ],
@@ -39,8 +46,14 @@
     "48": "icons/icon48.png",
     "128": "icons/icon128.png"
   },
-  "web_accessible_resources": [{
-    "resources": ["icons/*"],
-    "matches": ["https://github.com/*"]
-  }]
-} 
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "icons/*"
+      ],
+      "matches": [
+        "https://github.com/*"
+      ]
+    }
+  ]
+}
