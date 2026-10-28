@@ -7,7 +7,8 @@ const defaultSettings = {
     showIDE: true,
     showDeepWiki: true,
     showDiagram: true,
-    showGitingest: true
+    showGitingest: true,
+    showHtmlPreview: true
   },
   ideOptions: {
     showVSCode: true,
@@ -64,6 +65,15 @@ chrome.tabs.onRemoved.addListener((tabId) => {
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   const tabId = sender.tab?.id;
   if (!tabId) return;
+
+  // Fetch raw file text on behalf of the content script (SW has host permission -> no CORS issues)
+  if (message.type === 'FETCH_RAW') {
+    fetch(message.url)
+      .then(r => r.text())
+      .then(text => sendResponse({ ok: true, text }))
+      .catch(err => sendResponse({ ok: false, error: String(err) }));
+    return true; // async response
+  }
 
   switch (message.type) {
     case 'GET_STATE':

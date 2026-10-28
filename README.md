@@ -194,4 +194,8 @@ MIT License - see LICENSE.md for details
 
 **Version:** 1.0  
 **Last Updated:** 2024  
-**Minimum Chrome Version:** 88 
+**Minimum Chrome Version:** 88
+
+## HTML Preview
+
+On any GitHub `.html` file page, click **Preview** to render the file in a sandboxed in-page iframe (scripts disabled, HTML only). Toggle it off to return to the source. Enable/disable it from the extension popup.

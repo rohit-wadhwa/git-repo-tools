@@ -1,3 +1,8 @@
+## [1.1] - HTML Preview
+
+### Added
+- **HTML Preview**: on GitHub .html file pages, a "Preview" button renders the file in a sandboxed iframe (scripts disabled) right in the page, so you can see the rendered HTML without downloading it. Toggle it on/off; enable/disable via the popup. Uses raw.githubusercontent.com to fetch the file.
+
 # Changelog
 
 All notable changes to the GitRepoTools extension will be documented in this file.
